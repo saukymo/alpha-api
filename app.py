@@ -71,21 +71,25 @@ def login():
 
         user = User.query.filter(User.phone_number == phone_number, User.password == password).first()
         if user is not None:
-            return jsonify(status='OK', id=user.id, error='')
+            return jsonify(status='OK', error='', **user.to_dict())
         else:
             return jsonify(status='ERROR', error='Phone number or password not correct.')
 
 
-@app.route('/alpha-api/user/<uid>', methods=['PUT'])
+@app.route('/alpha-api/user/<uid>', methods=['GET', 'PUT'])
 def update_user_info(uid):
-    user_info = request.json
+    if request.method == 'PUT':
+        user_info = request.json
+        user = User.query.get(uid)
+        user.phone_number = user_info.get('phone_number', user.phone_number)
+        user.password = user_info.get('password', user.password)
+        user.age = user_info.get('age', user.age)
+        user.gender = user_info.get('gender', user.gender)
+        db.session.commit()
+        return jsonify(status='OK', error='')
+
     user = User.query.get(uid)
-    user.phone_number = user_info.get('phone_number', user.phone_number)
-    user.password = user_info.get('password', user.password)
-    user.age = user_info.get('age', user.age)
-    user.gender = user_info.get('gender', user.gender)
-    db.session.commit()
-    return jsonify(status='OK', error='')
+    return jsonify(status='OK', error='', **user.to_dict())
 
 
 @app.route('/alpha-api/upload', methods=['GET', 'POST'])

@@ -16,8 +16,10 @@ class User(db.Model):
         self.age = age
         self.gender = gender
 
-    def to_json(self):
-        return {"phone_number": self.phone_number,
+    def to_dict(self):
+        return {
+                "id": self.id,
+                "phone_number": self.phone_number,
                 "password": self.password,
                 "age": self.age,
                 "gender": self.gender
