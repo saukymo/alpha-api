@@ -18,22 +18,22 @@
             <th>Rating</th>
             <th>Doctor</th>
         </tr>
-        {% for history in get_histories() %}
+        {% for exam in exams %}
             <tr>
-                <td>{{history[1]}}</td>
-                <td><a href="uploads/{{history[2]}}">{{history[2]}}</a></td>
-                <td>{{history[8]}}</td>
-                <td>{{history[10]}}</td>
+                <td>{{exam[1]}}</td>
+                <td><a href="uploads/{{exam[2]}}">{{exam[2]}}</a></td>
+                <td>{{exam[8]}}</td>
+                <td>{{exam[10]}}</td>
                 <td>
-                    {% if history[11] == 0 %}
+                    {% if exam[11] %}
                         Male
                     {% else %}
                         Female
                     {% endif %}
                 </td>
-                <td>{{history[4]}}</td>
-                <td>{{history[5]}}</td>
-                <td>{{history[6]}}</td>
+                <td>{{exam[4]}}</td>
+                <td>{{exam[5]}}</td>
+                <td>{{exam[6]}}</td>
             </tr>
         {% endfor %}
     </table>
