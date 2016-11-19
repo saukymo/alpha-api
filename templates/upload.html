@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cana</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>Type</th>
+            <th>Filename</th>
+            <th>User</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Time</th>
+            <th>Rating</th>
+            <th>Doctor</th>
+        </tr>
+        {% for history in get_histories() %}
+            <tr>
+                <td>{{history[1]}}</td>
+                <td><a href="uploads/{{history[2]}}">{{history[2]}}</a></td>
+                <td>{{history[8]}}</td>
+                <td>{{history[10]}}</td>
+                <td>
+                    {% if history[11] == 0 %}
+                        Male
+                    {% else %}
+                        Female
+                    {% endif %}
+                </td>
+                <td>{{history[4]}}</td>
+                <td>{{history[5]}}</td>
+                <td>{{history[6]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
