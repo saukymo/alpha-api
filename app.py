@@ -80,12 +80,12 @@ def login():
 def update_user_info(uid):
     user_info = request.json
     user = User.query.get(uid)
-    user.phone_number = user_info.get('phone_number')
-    user.password = user_info.get('password')
-    user.age = user_info.get('age')
-    user.gender = user_info.get('gender')
+    user.phone_number = user_info.get('phone_number', user.phone_number)
+    user.password = user_info.get('password', user.password)
+    user.age = user_info.get('age', user.age)
+    user.gender = user_info.get('gender', user.gender)
     db.session.commit()
-    return jsonify(user.to_json())
+    return jsonify(status='OK', error='')
 
 
 @app.route('/alpha-api/upload', methods=['GET', 'POST'])
