@@ -52,7 +52,6 @@ def register():
         phone_number = user_info.get('phone_number')
         password = user_info.get('password')
 
-        # TODO: check if phone number exists
         if User.query.filter_by(phone_number=phone_number).all():
             return jsonify(status='ERROR', error='Phone number exists!')
 
@@ -60,7 +59,7 @@ def register():
         user = User(phone_number, password)
         user_id = db.session.add(user)
         db.session.commit()
-        return jsonify(status='OK', user_id=user_id, error='')
+        return jsonify(status='OK', id=user_id, error='')
 
 
 @app.route('/alpha-api/login', methods=['POST'])
@@ -72,7 +71,7 @@ def login():
 
         user = User.query.filter(User.phone_number == phone_number, User.password == password).first()
         if user is not None:
-            return jsonify(status='OK', error='')
+            return jsonify(status='OK', id=user.id, error='')
         else:
             return jsonify(status='ERROR', error='Phone number or password not correct.')
 
