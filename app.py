@@ -86,7 +86,7 @@ def update_user_info(uid):
         user.age = user_info.get('age', user.age)
         user.gender = user_info.get('gender', user.gender)
         db.session.commit()
-        return jsonify(status='OK', error='')
+        return jsonify(status='OK', error='', **user.to_dict())
 
     user = User.query.get(uid)
     return jsonify(status='OK', error='', **user.to_dict())
