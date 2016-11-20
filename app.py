@@ -93,11 +93,13 @@ def update_user_info(uid):
     return jsonify(status='OK', error='', **user.to_dict())
 
 
-@app.route('/alpha-api/upload', methods=['GET', 'POST'])
+@app.route('/alpha-api/exam', methods=['GET', 'POST'])
 def upload_files():
+    print(request)
     if request.method == 'POST':
-        uploaded_file = request.files['data']
+        uploaded_file = request.files['file']
         if uploaded_file and allowed_file(uploaded_file.filename):
+            print(request.form.to_dict())
             save_data(request.form.to_dict())
 
             filename = secure_filename(uploaded_file.filename)

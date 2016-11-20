@@ -9,11 +9,13 @@ class Exam(db.Model):
     filename = db.Column(db.String(40), unique=True)
     created_time = db.Column(db.String(40))
     exam_type = db.Column(db.String(40))
+    medicine = db.Column(db.Integer)
 
-    def __init__(self, user_uuid, filename, created_time, exam_type):
+    def __init__(self, user_uuid, filename, created_time, exam_type, medicine):
 
         self.user_uuid = user_uuid
         self.filename = filename
         self.created_time = created_time
         self.exam_type = exam_type
+        self.medicine = medicine
 
