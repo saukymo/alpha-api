@@ -51,12 +51,13 @@ def register():
         user_info = request.json
         phone_number = user_info.get('phone_number')
         password = user_info.get('password')
-
+        age = user_info.get('age')
+        gender = user_info.get('gender')
         if User.query.filter_by(phone_number=phone_number).all():
             return jsonify(status='ERROR', error='Phone number exists!')
 
         # TODO: encrypt password.
-        user = User(phone_number, password)
+        user = User(phone_number, password, age, gender)
         user_id = db.session.add(user)
         db.session.commit()
         return jsonify(status='OK', id=user_id, error='')
