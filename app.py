@@ -99,21 +99,16 @@ def upload_files():
     if request.method == 'POST':
         print(request.form.to_dict())
         exam_info = json.loads(request.form.get('data'))
-        exam_info['filename'] = None
+        filename = None
         if exam_info.get('file', None):
             uploaded_file = request.files['file']
-            exam_info['filename'] = secure_filename(uploaded_file.filename)
-        save_data(exam_info)
-        # if uploaded_file and allowed_file(uploaded_file.filename):
-        #     print(request.form.to_dict())
-        if exam_info.get('file', None):
             filename = secure_filename(uploaded_file.filename)
-            print(os.path.join(UPLOAD_FOLDER, filename))
+            exam_info['filename'] = filename
             uploaded_file.save(os.path.join(UPLOAD_FOLDER, filename))
+        save_data(exam_info)
 
-            print(jsonify(filename=filename))
-            return jsonify(filename=filename)
-        return jsonify(status='error'), 500
+        return jsonify(filename=filename, status='OK', error='')
+
     # show upload page.
     exams = Exam.query.all()
     return render_template('upload.html', exams=exams)
