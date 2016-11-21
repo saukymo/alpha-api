@@ -96,8 +96,8 @@ def update_user_info(uid):
 
 @app.route('/alpha-api/exam', methods=['GET', 'POST'])
 def upload_files():
-    print(request)
     if request.method == 'POST':
+        print(request.form.to_dict())
         exam_info = json.loads(request.form.get('data'))
         save_data(request.form.to_dict())
         if exam_info.get('file', None):

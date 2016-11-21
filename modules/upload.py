@@ -15,11 +15,12 @@ def get_allowed_extensions():
 
 
 def save_data(form):
-    user_uuid = form.get('uuid')
-    filename = form.get('filename')
-    created_time = form.get('created_time')
-    exam_type = form.get('exam_type')
-    exam = Exam(user_uuid, filename, created_time, exam_type)
+    user_uuid = form.get('userId')
+    filename = form.get('file')
+    created_time = form.get('createdTime')
+    exam_type = form.get('examType')
+    medicine = form.get('medicine')
+    exam = Exam(user_uuid, filename, created_time, exam_type, medicine)
 
     phone_number = form.get('phone_number')
     age = form.get('age')
