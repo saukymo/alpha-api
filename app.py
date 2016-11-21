@@ -105,9 +105,14 @@ def upload_files():
             filename = secure_filename(uploaded_file.filename)
             exam_info['filename'] = filename
             uploaded_file.save(os.path.join(UPLOAD_FOLDER, filename))
-        save_data(exam_info)
-
-        return jsonify(filename=filename, status='OK', error='')
+        err = None
+        try:
+            save_data(exam_info)
+        except Exception as e:
+            err = e
+        if err:
+            return jsonify(filename=filename, status='Error', error=err)
+        return jsonify(filename=filename, status='OK', error=err)
 
     # show upload page.
     exams = Exam.query.all()
