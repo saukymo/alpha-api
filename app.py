@@ -3,7 +3,7 @@ import configparser
 
 import pymysql
 import json
-
+from OpenSSL import SSL
 from flask import Flask, jsonify, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
 
@@ -131,5 +131,10 @@ def teardown_request(exception):
         db.session.remove()
     db.session.remove()
 
+context = SSL.Context(SSL.SSLv23_METHOD)
+cer = os.path.join(os.path.dirname(__file__), 'server.crt')
+key = os.path.join(os.path.dirname(__file__), 'server.key')
+
 if __name__ == '__main__':
-    app.run(debug=True, port=7000)
+    context = (cer, key)
+    app.run(debug=True, port=7000, ssl_context=context)
