@@ -123,5 +123,13 @@ def upload_files():
 def get_uploaded_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
+
+@app.teardown_request
+def teardown_request(exception):
+    if exception:
+        db.session.rollback()
+        db.session.remove()
+    db.session.remove()
+
 if __name__ == '__main__':
     app.run(debug=True, port=7000)

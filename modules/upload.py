@@ -29,5 +29,4 @@ def save_data(form):
     # user = User(phone_number, age, gender, uuid)
 
     db.session.add(exam)
-    # db.session.add(user)
     db.session.commit()
