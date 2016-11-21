@@ -99,9 +99,11 @@ def upload_files():
     if request.method == 'POST':
         print(request.form.to_dict())
         exam_info = json.loads(request.form.get('data'))
-        save_data(request.form.to_dict())
+        exam_info['filename'] = None
         if exam_info.get('file', None):
             uploaded_file = request.files['file']
+            exam_info['filename'] = secure_filename(uploaded_file.filename)
+        save_data(exam_info)
         # if uploaded_file and allowed_file(uploaded_file.filename):
         #     print(request.form.to_dict())
             filename = secure_filename(uploaded_file.filename)
