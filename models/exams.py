@@ -6,7 +6,7 @@ class Exam(db.Model):
     __table_args__ = ({"mysql_charset": "utf8mb4"})
     id = db.Column(db.Integer, primary_key=True)
     user_uuid = db.Column(db.String(40))
-    filename = db.Column(db.String(40), unique=True)
+    filename = db.Column(db.String(40))
     created_time = db.Column(db.String(40))
     exam_type = db.Column(db.String(40))
     medicine = db.Column(db.Integer)
