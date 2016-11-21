@@ -22,12 +22,12 @@ def save_data(form):
     medicine = form.get('medicine')
     exam = Exam(user_uuid, filename, created_time, exam_type, medicine)
 
-    phone_number = form.get('phone_number')
-    age = form.get('age')
-    gender = form.get('gender')
-    uuid = form.get('uuid')
-    user = User(phone_number, age, gender, uuid)
+    # phone_number = form.get('phone_number')
+    # age = form.get('age')
+    # gender = form.get('gender')
+    # uuid = form.get('uuid')
+    # user = User(phone_number, age, gender, uuid)
 
     db.session.add(exam)
-    db.session.add(user)
+    # db.session.add(user)
     db.session.commit()
