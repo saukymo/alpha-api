@@ -109,7 +109,7 @@ def upload_files():
         try:
             save_data(exam_info)
         except Exception as e:
-            err = e
+            err = e.message
         if err:
             return jsonify(filename=filename, status='Error', error=err)
         return jsonify(filename=filename, status='OK', error=err)
