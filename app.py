@@ -106,6 +106,7 @@ def upload_files():
         save_data(exam_info)
         # if uploaded_file and allowed_file(uploaded_file.filename):
         #     print(request.form.to_dict())
+        if exam_info.get('file', None):
             filename = secure_filename(uploaded_file.filename)
             print(os.path.join(UPLOAD_FOLDER, filename))
             uploaded_file.save(os.path.join(UPLOAD_FOLDER, filename))
