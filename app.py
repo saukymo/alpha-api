@@ -2,6 +2,7 @@ import os
 import configparser
 
 import pymysql
+import json
 
 from flask import Flask, jsonify, request, redirect, url_for, render_template, send_from_directory
 from werkzeug.utils import secure_filename
@@ -97,11 +98,12 @@ def update_user_info(uid):
 def upload_files():
     print(request)
     if request.method == 'POST':
-        uploaded_file = request.files['file']
-        if uploaded_file and allowed_file(uploaded_file.filename):
-            print(request.form.to_dict())
-            save_data(request.form.to_dict())
-
+        exam_info = json.loads(request.form.get('data'))
+        save_data(request.form.to_dict())
+        if exam_info.get('file', None):
+            uploaded_file = request.files['file']
+        # if uploaded_file and allowed_file(uploaded_file.filename):
+        #     print(request.form.to_dict())
             filename = secure_filename(uploaded_file.filename)
             print(os.path.join(UPLOAD_FOLDER, filename))
             uploaded_file.save(os.path.join(UPLOAD_FOLDER, filename))
