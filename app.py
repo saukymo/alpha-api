@@ -55,7 +55,7 @@ def register():
         age = user_info.get('age')
         gender = user_info.get('gender')
         if User.query.filter_by(phone_number=phone_number).all():
-            return jsonify(status='ERROR', error='Phone number exists!')
+            return jsonify(status='ERROR', error='电话号码已经注册')
 
         # TODO: encrypt password.
         user = User(phone_number, password, age, gender)
@@ -75,7 +75,7 @@ def login():
         if user is not None:
             return jsonify(status='OK', error='', **user.to_dict())
         else:
-            return jsonify(status='ERROR', error='Phone number or password not correct.')
+            return jsonify(status='ERROR', error='用户名或密码不正确')
 
 
 @app.route('/alpha-api/user/<uid>', methods=['GET', 'PUT'])

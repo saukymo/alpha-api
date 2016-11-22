@@ -10,12 +10,13 @@ class Exam(db.Model):
     created_time = db.Column(db.String(40))
     exam_type = db.Column(db.String(40))
     medicine = db.Column(db.Integer)
+    score = db.Column(db.Integer)
 
-    def __init__(self, user_uuid, filename, created_time, exam_type, medicine):
+    def __init__(self, user_uuid, filename, created_time, exam_type, medicine, score):
 
         self.user_uuid = user_uuid
         self.filename = filename
         self.created_time = created_time
         self.exam_type = exam_type
         self.medicine = medicine
-
+        self.score = score

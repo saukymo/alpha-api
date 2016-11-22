@@ -20,7 +20,8 @@ def save_data(form):
     created_time = form.get('createdTime')
     exam_type = form.get('examType')
     medicine = form.get('medicine')
-    exam = Exam(user_uuid, filename, created_time, exam_type, medicine)
+    score = form.get('result')
+    exam = Exam(user_uuid, filename, created_time, exam_type, medicine, score)
 
     # phone_number = form.get('phone_number')
     # age = form.get('age')
