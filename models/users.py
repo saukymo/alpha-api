@@ -9,12 +9,14 @@ class User(db.Model):
     age = db.Column(db.Integer)
     gender = db.Column(db.Boolean)
     password = db.Column(db.String(40))
+    uuid = db.Column(db.String(40))
 
     def __init__(self, phone_number, password, age=None, gender=None):
         self.phone_number = phone_number
         self.password = password
         self.age = age
         self.gender = gender
+        self.uuid = None
 
     def to_dict(self):
         return {
@@ -25,3 +27,10 @@ class User(db.Model):
                 "gender": self.gender
                 }
 
+    def sync_info(self):
+        return {
+            "id": self.id,
+            "phone": self.phone_number,
+            "age": self.age,
+            "gender": self.gender
+        }

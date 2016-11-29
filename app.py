@@ -11,7 +11,8 @@ from werkzeug.utils import secure_filename
 from database import db
 from models.exams import Exam
 from models.users import User
-from modules.upload import save_data, allowed_file
+from modules.upload import save_data
+from modules.api import register_user
 
 UPLOAD_FOLDER = "uploads/"
 
@@ -60,9 +61,13 @@ def register():
 
         # TODO: encrypt password.
         user = User(phone_number, password, age, gender)
-        user_id = db.session.add(user)
+        db.session.add(user)
+        db.session.flush()
+        user.uuid = register_user(user.sync_info()).get("data")[0].get("uid")
+        db.session.add(user)
         db.session.commit()
-        return jsonify(status='OK', id=user_id, error='')
+
+        return jsonify(status='OK', id=user.id, error='')
 
 
 @app.route('/alpha-api/login', methods=['POST'])
