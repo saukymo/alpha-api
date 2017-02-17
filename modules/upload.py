@@ -4,7 +4,7 @@ from database import db
 from models.exams import Exam
 from models.users import User
 # from app import app
-from api import upload_data, upload_file
+from modules.api import upload_data, upload_file
 
 ALLOWED_EXTENSIONS = set(ext for ext in ['txt', "md", "mp4", "3gp"])
 

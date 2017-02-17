@@ -1,6 +1,9 @@
 # coding: utf8
 import os
-import configparser
+try:
+    import configparser
+except:
+    from six.moves import configparser
 
 import pymysql
 import json
@@ -143,4 +146,4 @@ key = os.path.join(os.path.dirname(__file__), 'server.key')
 
 if __name__ == '__main__':
     context = (cer, key)
-    app.run(debug=True, port=7000, ssl_context=context)
+    app.run(debug=True, port=7000, ssl_context=context, host='0.0.0.0', threaded=True)
